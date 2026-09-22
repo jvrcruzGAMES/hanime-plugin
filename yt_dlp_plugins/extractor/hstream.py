@@ -2,19 +2,18 @@ import json
 import os.path
 import urllib.parse
 
-import ada_url
-
 from Cryptodome.Hash import SHA1
 from yt_dlp.extractor.common import InfoExtractor
+from yt_dlp_plugins.hanime_plugin.helpers import URL
 
 def url_pathjoin(base, *parts):
-    url = ada_url.URL(base)
+    url = URL(base)
     url.pathname = os.path.join(url.pathname, *parts)
     return url.href
 
 # Git-style hashes
 def domain_hash(url):
-    url = ada_url.URL(url)
+    url = URL(url)
     return SHA1.new(url.hostname.encode('ascii')).hexdigest()[:6]
 
 class HstreamIE(InfoExtractor):
